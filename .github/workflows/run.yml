@@ -25,18 +25,18 @@ jobs:
       - name: 'run cf2dns v4'
         if: env.UPDATE_IPV4 == 'true' && !cancelled()
         env:
-          KEY: ${{ secrets.KEY }}
-          DOMAINS: ${{ secrets.DOMAINS }}
-          SECRETID: ${{ secrets.SECRETID }}
-          SECRETKEY: ${{ secrets.SECRETKEY }}
+          KEY: ${{ env.KEY }}
+          DOMAINS: ${{ env.DOMAINS }}
+          SECRETID: ${{ env.SECRETID }}
+          SECRETKEY: ${{ env.SECRETKEY }}
         run: python cf2dns_actions.py
       - name: 'run cf2dns v6'
         if: env.UPDATE_IPV6 == 'true' && !cancelled()
         env:
-          KEY: ${{ secrets.KEY }}
-          DOMAINS: ${{ secrets.DOMAINSV6 }}
-          SECRETID: ${{ secrets.SECRETID }}
-          SECRETKEY: ${{ secrets.SECRETKEY }}
+          KEY: ${{ env.KEY }}
+          DOMAINS: ${{ env.DOMAINSV6 }}
+          SECRETID: ${{ env.SECRETID }}
+          SECRETKEY: ${{ env.SECRETKEY }}
         run:  |
           sed -i "s/TYPE = 'v4'/TYPE = 'v6'/" cf2dns_actions.py
           python cf2dns_actions.py
