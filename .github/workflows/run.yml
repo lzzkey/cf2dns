@@ -17,7 +17,7 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@v3
       - name: 'Set up Python'
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v4
         with:
           python-version: 3.7
       - name: 'Install dependencies'
@@ -31,7 +31,7 @@ jobs:
           SECRETKEY: ${{ secrets.SECRETKEY }}
         run: python cf2dns_actions.py A
       - name: 'run cf2dns v6'
-        if: env.UPDATE_IPV6 == 'true' && !cancelled()
+        if: cancelled() != true
         env:
           KEY: ${{ secrets.KEY }}
           DOMAINS: ${{ secrets.DOMAINSV6 }}
